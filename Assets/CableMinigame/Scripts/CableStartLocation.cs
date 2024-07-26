@@ -34,6 +34,11 @@ public class CableStartLocation : MonoBehaviour, IGrapeable {
 
 	public void OnReleased()
 	{
+		if (!inputMan)
+		{
+			return;
+		}
+		
 		Vector3 WorldPoint = inputMan.TouchLocationFromLowerCam;
 		Collider2D[] cols = Physics2D.OverlapPointAll(WorldPoint, CableEndLocationMask);
 
