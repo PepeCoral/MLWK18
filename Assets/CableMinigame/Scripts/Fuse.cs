@@ -6,12 +6,16 @@ public class Fuse : MonoBehaviour, IGrapeable
 {
 
 	[SerializeField] private bool isBroken = false;
-	private bool isSlotted = false;
+	public bool isSlotted { get; private set; }
+	
 	[SerializeField] private FuseSlot AttachedFuseSlot;
 	[SerializeField] private LayerMask FuseSlotLayer;
 	private InputManager inputMan;
 	// Use this for initialization
-	void Awake () {
+	void Awake ()
+	{
+		isSlotted = false;
+		
 		if (AttachedFuseSlot != null)
 		{
 			AttachedFuseSlot.isSlotted = true;
@@ -27,7 +31,7 @@ public class Fuse : MonoBehaviour, IGrapeable
 		}
 	}
 
-	public void OnPressed(InputManager InputManager)
+	public void OnPressed(InputManager InputManager, InputController NewInputCtrl)
 	{
 		inputMan = InputManager;
 	}

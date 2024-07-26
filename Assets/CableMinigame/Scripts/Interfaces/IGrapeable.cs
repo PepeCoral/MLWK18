@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IGrapeable
 {
-	void OnPressed(InputManager InputManager);
+	void OnPressed(InputManager InputManager, InputController InputCtrl);
 	void OnReleased();
 
 	bool CanBeGrapped();
