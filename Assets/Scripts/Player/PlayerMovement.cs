@@ -3,10 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.N3DS;
 
+
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
     private bool havePenalty = false;
     private Vector2 input;
+
+
+
+    private Rigidbody2D rb;
+    [SerializeField] float _speed;
+
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
 
     void Update()
     {
@@ -14,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
         var cross = GetCross();
 
 #if UNITY_EDITOR
-        pad = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        pad = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         // cross = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 #endif
 
@@ -31,8 +44,15 @@ public class PlayerMovement : MonoBehaviour
 
         print(input);
 
+        rb.velocity = input * _speed * Time.deltaTime;
     }
 
+
+    void FixedUpdate()
+    {
+
+
+    }
     private static Vector2 GetCross()
     {
         var cross = new Vector2();
