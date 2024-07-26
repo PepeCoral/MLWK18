@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.N3DS;
@@ -24,21 +25,25 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         var pad = GamePad.CirclePad.normalized;
-        var cross = GetCross();
+        var cross = GetCross().normalized;
 
-        if (GamePad.GetButtonTrigger(N3dsButton.L))
+        if (GamePad.GetButtonTrigger(N3dsButton.L) || Input.GetKeyDown(KeyCode.B))
         {
             havePenalty = !havePenalty;
         }
 
 #if UNITY_EDITOR
-        pad = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        // cross = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        pad = PadEditor().normalized;
+        cross = CrossEditor().normalized;
 #endif
 
         if (havePenalty)
         {
-            input += new Vector2(cross.x, pad.y);
+            if (Math.Abs(pad.y) < 0.6)
+            {
+                pad.y = 0;
+            }
+            input = new Vector2(cross.x, pad.y);
         }
         else
         {
@@ -52,12 +57,61 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = input * _speed * Time.deltaTime;
     }
 
-
-    void FixedUpdate()
+    private static Vector2 CrossEditor()
     {
+        Vector2 cross;
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            cross = Vector2.up;
+        }
+        else if (Input.GetKey(KeyCode.DownArrow))
+        {
+            cross = Vector2.down;
+        }
+        else if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            cross = Vector2.left;
+        }
+        else if (Input.GetKey(KeyCode.RightArrow))
+        {
+            cross = Vector2.right;
+        }
+        else
+        {
+            cross = Vector2.zero;
+        }
 
-
+        return cross;
     }
+
+    private static Vector2 PadEditor()
+    {
+        Vector2 pad;
+        if (Input.GetKey(KeyCode.A))
+        {
+            pad = Vector2.left;
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            pad = Vector2.right;
+        }
+        else if (Input.GetKey(KeyCode.W))
+        {
+            pad = Vector2.up;
+        }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            pad = Vector2.down;
+        }
+        else
+        {
+            pad = Vector2.zero;
+        }
+
+        return pad;
+    }
+
+
     private static Vector2 GetCross()
     {
         var cross = new Vector2();
