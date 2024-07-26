@@ -5,12 +5,10 @@ using UnityEngine;
 public class InputController : MonoBehaviour
 {
 	[SerializeField] private LayerMask GrapableLayerMask;
-	[SerializeField] public Camera LowerCamera;
 	
 	private InputManager InputMan;
-
-	private GameObject AttachedObject;
 	private IGrapeable GrappedObject;
+	
 	// Use this for initialization
 	void Awake () {
 		InputMan = GetComponent<InputManager>();
@@ -26,9 +24,14 @@ public class InputController : MonoBehaviour
 
 		if (InputMan.TouchReleasedThisFrame && GrappedObject != null)
 		{
-			GrappedObject.OnReleased();
-			AttachedObject = null;
+			DeAttach();
 		}
+	}
+
+	public void DeAttach()
+	{
+		GrappedObject.OnReleased();
+		GrappedObject = null;
 	}
 
 	private void TryGetObject()
@@ -41,11 +44,12 @@ public class InputController : MonoBehaviour
 		{
 			if (col)
 			{
-				GrappedObject = col.gameObject.GetComponent<IGrapeable>();
+				IGrapeable TempGrappedObject = col.gameObject.GetComponent<IGrapeable>();
 
-				if (GrappedObject.CanBeGrapped())
+				if (TempGrappedObject.CanBeGrapped())
 				{
-					GrappedObject.OnPressed(InputMan);
+					GrappedObject = TempGrappedObject;
+					GrappedObject.OnPressed(InputMan, this);
 					break;
 				}
 			}

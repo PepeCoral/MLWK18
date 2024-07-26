@@ -13,9 +13,12 @@ public class CableStartLocation : MonoBehaviour, IGrapeable {
 	
 	private LineRenderer lineRen;
 	private InputManager inputMan;
-	private bool isCompleted = false;
+
+	public bool isCompleted { get; private set; }
 	private void Awake()
 	{
+		isCompleted = false;
+		
 		lineRen = GetComponent<LineRenderer>();
 	}
 
@@ -27,13 +30,18 @@ public class CableStartLocation : MonoBehaviour, IGrapeable {
 		}
 	}
 
-	public void OnPressed(InputManager InputManager)
+	public void OnPressed(InputManager InputManager, InputController NewInputCtrl)
 	{
 		inputMan = InputManager;
 	}
 
 	public void OnReleased()
 	{
+		if (!inputMan)
+		{
+			return;
+		}
+		
 		Vector3 WorldPoint = inputMan.TouchLocationFromLowerCam;
 		Collider2D[] cols = Physics2D.OverlapPointAll(WorldPoint, CableEndLocationMask);
 
