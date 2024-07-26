@@ -32,26 +32,29 @@ public class PlayerMovement : MonoBehaviour
         }
 
 #if UNITY_EDITOR
-        if(Input.GetKey(KeyCode.A))
+        pad = PadEditor();
+        cross = CrossEditor();
+#endif
+
+        if (havePenalty)
         {
-            pad = Vector2.left;
+            input = new Vector2(cross.x, pad.y);
         }
-        else if(Input.GetKey(KeyCode.D))
+        else
         {
-            pad = Vector2.right;
+            input = pad + cross;
         }
-        else if(Input.GetKey(KeyCode.W))
-        {
-            pad = Vector2.up;
-        }
-        else if(Input.GetKey(KeyCode.S))
-        {
-            pad = Vector2.down;
-        }
-        else{
-            pad = Vector2.zero;
-        }
-        
+
+        input = input.normalized;
+
+        print(input);
+
+        rb.velocity = input * _speed * Time.deltaTime;
+    }
+
+    private static Vector2 CrossEditor()
+    {
+        Vector2 cross;
         if (Input.GetKey(KeyCode.UpArrow))
         {
             cross = Vector2.up;
@@ -72,22 +75,35 @@ public class PlayerMovement : MonoBehaviour
         {
             cross = Vector2.zero;
         }
-#endif
 
-        if (havePenalty)
+        return cross;
+    }
+
+    private static Vector2 PadEditor()
+    {
+        Vector2 pad;
+        if (Input.GetKey(KeyCode.A))
         {
-            input = new Vector2(cross.x, pad.y);
+            pad = Vector2.left;
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            pad = Vector2.right;
+        }
+        else if (Input.GetKey(KeyCode.W))
+        {
+            pad = Vector2.up;
+        }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            pad = Vector2.down;
         }
         else
         {
-            input = pad + cross;
+            pad = Vector2.zero;
         }
 
-        input = input.normalized;
-
-        print(input);
-
-        rb.velocity = input * _speed * Time.deltaTime;
+        return pad;
     }
 
 
