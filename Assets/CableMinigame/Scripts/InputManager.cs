@@ -19,6 +19,7 @@ public class InputManager : MonoBehaviour
 
 
     public Touch TouchInput { get; private set; }
+    public Vector3 TouchLocationFromLowerCam { get; private set; }
     public bool TouchPressedThisFrame { get; private set; }
     public bool TouchReleasedThisFrame { get; private set; }
 
@@ -101,6 +102,10 @@ public class InputManager : MonoBehaviour
     {
         TouchInput = touch;
 
+        Vector3 WorldToScreen = LowerCamera.ScreenToWorldPoint(TouchInput.position);
+        WorldToScreen.z = 0;
+        
+        TouchLocationFromLowerCam = WorldToScreen;
     }
 
     public Vector2 GetPosition()
@@ -135,8 +140,7 @@ public class InputManager : MonoBehaviour
     private void DoTouchDebug()
     {
         //Touch position from mouse or from 3DS is in ScreenPosition.
-        Vector3 spawnPosition = LowerCamera.ScreenToWorldPoint(TouchInput.position);
-        spawnPosition.z = 0;
+        Vector3 spawnPosition = TouchLocationFromLowerCam;
 
         if (TouchPressedThisFrame)
         {
