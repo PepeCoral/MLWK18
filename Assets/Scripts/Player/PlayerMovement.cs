@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.N3DS;
@@ -24,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         var pad = GamePad.CirclePad.normalized;
-        var cross = GetCross();
+        var cross = GetCross().normalized;
 
         if (GamePad.GetButtonTrigger(N3dsButton.L) || Input.GetKeyDown(KeyCode.B))
         {
@@ -32,12 +33,16 @@ public class PlayerMovement : MonoBehaviour
         }
 
 #if UNITY_EDITOR
-        pad = PadEditor();
-        cross = CrossEditor();
+        pad = PadEditor().normalized;
+        cross = CrossEditor().normalized;
 #endif
 
         if (havePenalty)
         {
+            if (Math.Abs(pad.y) < 0.6)
+            {
+                pad.y = 0;
+            }
             input = new Vector2(cross.x, pad.y);
         }
         else
