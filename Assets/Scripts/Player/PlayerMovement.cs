@@ -26,6 +26,11 @@ public class PlayerMovement : MonoBehaviour
         var pad = GamePad.CirclePad.normalized;
         var cross = GetCross();
 
+        if (GamePad.GetButtonTrigger(N3dsButton.L))
+        {
+            havePenalty = !havePenalty;
+        }
+
 #if UNITY_EDITOR
         pad = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         // cross = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
