@@ -13,6 +13,11 @@ public class PlayerMovement : MonoBehaviour
         var pad = GamePad.CirclePad.normalized;
         var cross = GetCross();
 
+#if UNITY_EDITOR
+        pad = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        // cross = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+#endif
+
         if (havePenalty)
         {
             input += new Vector2(cross.x, pad.y);
@@ -21,8 +26,11 @@ public class PlayerMovement : MonoBehaviour
         {
             input = pad + cross;
         }
-        
+
         input = input.normalized;
+
+        print(input);
+
     }
 
     private static Vector2 GetCross()
