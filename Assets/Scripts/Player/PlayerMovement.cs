@@ -148,4 +148,9 @@ public class PlayerMovement : MonoBehaviour
 
         return cross;
     }
+
+    private void OnDisable()
+    {
+        rb.velocity = Vector2.zero;
+    }
 }
