@@ -9,6 +9,7 @@ public class Fuse : MonoBehaviour, ITactilGameObject
 	
 	[SerializeField] private FuseSlot AttachedFuseSlot;
 	[SerializeField] private LayerMask FuseSlotLayer;
+	
 	private InputManager inputMan;
 	// Use this for initialization
 	void Awake ()
@@ -17,7 +18,7 @@ public class Fuse : MonoBehaviour, ITactilGameObject
 		
 		if (AttachedFuseSlot != null)
 		{
-			AttachedFuseSlot.isSlotted = true;
+			AttachedFuseSlot.SetIsSlotted(true, isBroken);
 			isSlotted = true;
 		}
 	}
@@ -43,7 +44,7 @@ public class Fuse : MonoBehaviour, ITactilGameObject
 			
 			if (AttachedFuseSlot)
 			{
-				AttachedFuseSlot.isSlotted = false;
+				AttachedFuseSlot.SetIsSlotted(false, isBroken);
 				AttachedFuseSlot = null;
 			}
 			
@@ -66,7 +67,7 @@ public class Fuse : MonoBehaviour, ITactilGameObject
 
 				if (targetSlot && !targetSlot.isSlotted)
 				{
-					targetSlot.isSlotted = true;
+					targetSlot.SetIsSlotted(true, isBroken);
 					AttachedFuseSlot = targetSlot;
 					isSlotted = true;
 					transform.position = new Vector3(AttachedFuseSlot.transform.position.x, AttachedFuseSlot.transform.position.y, AttachedFuseSlot.transform.position.z - 1);

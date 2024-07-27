@@ -3,80 +3,96 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class MinigameManager : MonoBehaviour
-{
+public class MinigameManager : MonoBehaviour {
+	
+	[FormerlySerializedAs("TimeToFinish")]
+	[Header("Generic Options")]
+	//Time to finish this minigame once started, if this expires, the minigame has failed
+	[SerializeField] private float MinigameTimeLength = 15;
+	[SerializeField] private float CountdownToStart = 5;
+	[SerializeField] private float NextSceneTimer = 3;
+	[SerializeField] SceneSwitcher Switcher;
+	
+	protected float CurrentStartCountdown;
+	protected float CurrentTimeLength;
+	protected float CurrentNextSceneTimer;
+	
+	private bool bIsMinigameTimerActive = false;
+	private bool bIsStartCountdownActive = true;
+	private bool bIsNextSceneTimerActive = false;
+	
+	// Use this for initialization
+	void Awake ()
+	{
+		CurrentTimeLength = MinigameTimeLength;
+		CurrentStartCountdown = CountdownToStart;
+		CurrentNextSceneTimer = NextSceneTimer;
+	}
 
-    [FormerlySerializedAs("TimeToFinish")]
-    [Header("Generic Options")]
-    //Time to finish this minigame once started, if this expires, the minigame has failed
-    [SerializeField] private float MinigameTimeLength = 15;
-    [SerializeField] private float CountdownToStart = 5;
+	protected virtual void StartMinigame()
+	{
+		bIsMinigameTimerActive = true;
+	}
+	
+	// Update is called once per frame
+	protected virtual void Update () {
+		if (bIsMinigameTimerActive)
+		{
+			CurrentTimeLength -= Time.deltaTime;
 
+			if (CurrentTimeLength <= 0)
+			{
+				CurrentTimeLength = 0;
+				OnGameTimerExpired();
+			}
+		}
 
-    protected float CurrentStartCountdown;
-    protected float CurrentTimeLength;
+		if (bIsStartCountdownActive)
+		{
+			CurrentStartCountdown -= Time.deltaTime;
 
-    private bool bIsMinigameTimerActive = false;
-    private bool bIsStartCountdownActive = true;
+			if (CurrentStartCountdown <= 0)
+			{
+				CurrentStartCountdown = 0;
+				bIsStartCountdownActive = false;
+				
+				StartMinigame();
+			}
+		}
+		
+		if (bIsNextSceneTimerActive)
+		{
+			CurrentNextSceneTimer -= Time.deltaTime;
 
-    // Use this for initialization
-    void Awake()
-    {
-        CurrentTimeLength = MinigameTimeLength;
-        CurrentStartCountdown = CountdownToStart;
-    }
+			if (CurrentNextSceneTimer <= 0)
+			{
+				CurrentNextSceneTimer = 0;
+				bIsNextSceneTimerActive = false;
+				
+				Switcher.SwitchToNextScene();
+			}
+		}
+	}
 
-    protected virtual void StartMinigame()
-    {
-        bIsMinigameTimerActive = true;
+	protected virtual void OnGameTimerExpired()
+	{
+		bIsMinigameTimerActive = false;
+		bIsNextSceneTimerActive = true;
+	}
+	
+	public virtual bool IsMinigameActive()
+	{
+		return bIsMinigameTimerActive;
+	}
 
-    }
+	public virtual bool CanMinigameEnd()
+	{
+		return true;
+	}
 
-    // Update is called once per frame
-    protected virtual void Update()
-    {
-        if (bIsMinigameTimerActive)
-        {
-            CurrentTimeLength -= Time.deltaTime;
-
-            if (CurrentTimeLength <= 0)
-            {
-                CurrentTimeLength = 0;
-                OnGameTimerExpired();
-            }
-        }
-
-        if (bIsStartCountdownActive)
-        {
-            CurrentStartCountdown -= Time.deltaTime;
-
-            if (CurrentStartCountdown <= 0)
-            {
-                CurrentStartCountdown = 0;
-                bIsStartCountdownActive = false;
-
-                StartMinigame();
-            }
-        }
-    }
-
-    protected virtual void OnGameTimerExpired()
-    {
-        bIsMinigameTimerActive = false;
-    }
-
-    public virtual bool IsMinigameActive()
-    {
-        return bIsMinigameTimerActive;
-    }
-
-    public virtual bool CanMinigameEnd()
-    {
-        return true;
-    }
-
-    public virtual void CompleteMinigame()
-    {
-        bIsMinigameTimerActive = false;
-    }
+	public virtual void CompleteMinigame()
+	{
+		bIsMinigameTimerActive = false;
+		bIsNextSceneTimerActive = true;
+	}
 }
