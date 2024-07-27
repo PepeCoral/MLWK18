@@ -26,6 +26,6 @@ public class Shaking : MonoBehaviour {
 
 	private bool DetectShaking()
 	{
-		return gyro.userAcceleration.magnitude > 1.5f;
+		return gyro.userAcceleration.magnitude > 0.7f;
 	}
 }
