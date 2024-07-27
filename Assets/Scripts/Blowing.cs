@@ -55,6 +55,7 @@ public class Blowing : MonoBehaviour
     // gui that displays a number
     private void OnGUI()
     {
+        UnityEngine.N3DS.Microphone.IsEnabled();
         GUI.Label(new Rect(10, 10, 100, 20), debugMean.ToString());
     }
 

@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 pad.y = 0;
             }
-            input = new Vector2(cross.x, pad.y);
+            input = new Vector2(pad.x, cross.y);
         }
         else
         {
