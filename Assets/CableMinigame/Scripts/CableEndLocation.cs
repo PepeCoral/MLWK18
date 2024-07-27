@@ -1,10 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class CableEndLocation : MonoBehaviour
 {
-
-	[SerializeField] public CableColors cableColor;
-
+	[SerializeField] public CableColors CableEndColor;
 }

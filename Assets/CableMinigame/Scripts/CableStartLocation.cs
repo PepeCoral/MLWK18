@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum CableColors {Yellow, Red, Green, Blue, Pink};
-public class CableStartLocation : MonoBehaviour, IGrapeable {
+public class CableStartLocation : MonoBehaviour, ITactilGameObject {
 
 	[SerializeField]
 	CableColors cableColor;
@@ -13,9 +13,12 @@ public class CableStartLocation : MonoBehaviour, IGrapeable {
 	
 	private LineRenderer lineRen;
 	private InputManager inputMan;
-	private bool isCompleted = false;
+
+	public bool isCompleted { get; private set; }
 	private void Awake()
 	{
+		isCompleted = false;
+		
 		lineRen = GetComponent<LineRenderer>();
 	}
 
@@ -27,7 +30,7 @@ public class CableStartLocation : MonoBehaviour, IGrapeable {
 		}
 	}
 
-	public void OnPressed(InputManager InputManager)
+	public void OnPressed(InputManager InputManager, TactilInputController newTactilInputCtrl)
 	{
 		inputMan = InputManager;
 	}
@@ -48,7 +51,7 @@ public class CableStartLocation : MonoBehaviour, IGrapeable {
 			{
 				CableEndLocation EndLocationGO = col.gameObject.GetComponent<CableEndLocation>();
 
-				if (EndLocationGO && EndLocationGO.cableColor == cableColor)
+				if (EndLocationGO && EndLocationGO.CableEndColor == cableColor)
 				{
 					lineRen.SetPosition(1, transform.InverseTransformPoint(EndLocationGO.transform.position));
 					isCompleted = true;
@@ -65,7 +68,7 @@ public class CableStartLocation : MonoBehaviour, IGrapeable {
 		}
 	}
 
-	public bool CanBeGrapped()
+	public bool CanBeSelected()
 	{
 		return !isCompleted && inputMan == null;
 	}

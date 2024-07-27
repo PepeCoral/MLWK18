@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputController : MonoBehaviour
+public class TactilInputController : MonoBehaviour
 {
 	[SerializeField] private LayerMask GrapableLayerMask;
-	[SerializeField] public Camera LowerCamera;
+	[SerializeField] private MinigameManager MinigameManager;
 	
 	private InputManager InputMan;
-
-	private GameObject AttachedObject;
-	private IGrapeable GrappedObject;
+	private ITactilGameObject GrappedObject;
+	
 	// Use this for initialization
 	void Awake () {
 		InputMan = GetComponent<InputManager>();
@@ -19,6 +18,12 @@ public class InputController : MonoBehaviour
 	// Update is called once per frame
 	void Update () {
 
+		if (!MinigameManager.IsMinigameActive())
+		{
+			DeAttach();
+			return;
+		}
+		
 		if (InputMan.TouchPressedThisFrame)
 		{
 			TryGetObject();
@@ -26,8 +31,18 @@ public class InputController : MonoBehaviour
 
 		if (InputMan.TouchReleasedThisFrame && GrappedObject != null)
 		{
+			DeAttach();
+		}
+
+
+	}
+
+	public void DeAttach()
+	{
+		if (GrappedObject != null)
+		{
 			GrappedObject.OnReleased();
-			AttachedObject = null;
+			GrappedObject = null;
 		}
 	}
 
@@ -41,11 +56,12 @@ public class InputController : MonoBehaviour
 		{
 			if (col)
 			{
-				GrappedObject = col.gameObject.GetComponent<IGrapeable>();
+				ITactilGameObject TempGrappedObject = col.gameObject.GetComponent<ITactilGameObject>();
 
-				if (GrappedObject.CanBeGrapped())
+				if (TempGrappedObject.CanBeSelected())
 				{
-					GrappedObject.OnPressed(InputMan);
+					GrappedObject = TempGrappedObject;
+					GrappedObject.OnPressed(InputMan, this);
 					break;
 				}
 			}
