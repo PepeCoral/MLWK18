@@ -52,7 +52,6 @@ public class PlayerMovement : MonoBehaviour
 
         input = input.normalized;
 
-        print(input);
 
         rb.velocity = input * _speed * Time.deltaTime;
     }
