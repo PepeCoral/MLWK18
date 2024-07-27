@@ -16,6 +16,7 @@ public class JarronGiroscopio : MonoBehaviour
     [SerializeField] GameObject join;
     [SerializeField] private float gravityScale;
     [SerializeField] private AudioSource _audio;
+    private bool falling = false;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -27,6 +28,7 @@ public class JarronGiroscopio : MonoBehaviour
 
     private void Update()
     {
+        if (falling) return;
         var input = GetInputGyro();
 
         if (input == 1)
@@ -83,6 +85,7 @@ public class JarronGiroscopio : MonoBehaviour
 
     public void JarronFall()
     {
+        falling = true;
         join.SetActive(false);
     }
 
