@@ -23,7 +23,7 @@ public class JarronAscenso : MonoBehaviour
     {
         if (transform.position.y < _maxHeigh)
         {
-            transform.position += Vector3.up * _speed * Time.deltaTime;
+            transform.position += Vector3.up * (_speed * Time.deltaTime);
         }
         else if (_isPlaying)
         {
