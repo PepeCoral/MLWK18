@@ -10,25 +10,28 @@ public class MinigameManager : MonoBehaviour {
 	//Time to finish this minigame once started, if this expires, the minigame has failed
 	[SerializeField] private float MinigameTimeLength = 15;
 	[SerializeField] private float CountdownToStart = 5;
-
-
+	[SerializeField] private float NextSceneTimer = 3;
+	[SerializeField] SceneSwitcher Switcher;
+	
 	protected float CurrentStartCountdown;
 	protected float CurrentTimeLength;
+	protected float CurrentNextSceneTimer;
 	
 	private bool bIsMinigameTimerActive = false;
 	private bool bIsStartCountdownActive = true;
+	private bool bIsNextSceneTimerActive = false;
 	
 	// Use this for initialization
 	void Awake ()
 	{
 		CurrentTimeLength = MinigameTimeLength;
 		CurrentStartCountdown = CountdownToStart;
+		CurrentNextSceneTimer = NextSceneTimer;
 	}
 
 	protected virtual void StartMinigame()
 	{
 		bIsMinigameTimerActive = true;
-		
 	}
 	
 	// Update is called once per frame
@@ -56,11 +59,25 @@ public class MinigameManager : MonoBehaviour {
 				StartMinigame();
 			}
 		}
+		
+		if (bIsNextSceneTimerActive)
+		{
+			CurrentNextSceneTimer -= Time.deltaTime;
+
+			if (CurrentNextSceneTimer <= 0)
+			{
+				CurrentNextSceneTimer = 0;
+				bIsNextSceneTimerActive = false;
+				
+				Switcher.SwitchToNextScene();
+			}
+		}
 	}
 
 	protected virtual void OnGameTimerExpired()
 	{
 		bIsMinigameTimerActive = false;
+		bIsNextSceneTimerActive = true;
 	}
 	
 	public virtual bool IsMinigameActive()
@@ -76,5 +93,6 @@ public class MinigameManager : MonoBehaviour {
 	public virtual void CompleteMinigame()
 	{
 		bIsMinigameTimerActive = false;
+		bIsNextSceneTimerActive = true;
 	}
 }
