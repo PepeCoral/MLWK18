@@ -11,6 +11,8 @@ public class CableStartLocation : MonoBehaviour, ITactilGameObject {
 	[SerializeField]
 	LayerMask CableEndLocationMask;
 	
+	[SerializeField] private LightBulb lightBulb;
+	
 	private LineRenderer lineRen;
 	private InputManager inputMan;
 
@@ -55,6 +57,7 @@ public class CableStartLocation : MonoBehaviour, ITactilGameObject {
 				{
 					lineRen.SetPosition(1, transform.InverseTransformPoint(EndLocationGO.transform.position));
 					isCompleted = true;
+					lightBulb.TurnOn();
 					break;
 				}
 			}
