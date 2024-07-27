@@ -17,6 +17,10 @@ public class MoverExtintor : MonoBehaviour
 
 	public GameObject fuegoDerecha;
 	public GameObject fuegoIzquierda;
+
+	[SerializeField] private Quaternion targetRotation;
+
+	AudioSource source;
 	private void Awake()
 	{
 		inputManager = input.GetComponent<InputManager>();
@@ -55,22 +59,26 @@ public class MoverExtintor : MonoBehaviour
 		Vector3 direction = (newPosition - transform.position).normalized;
 
 		// Calcula la rotación hacia la nueva dirección
-		Quaternion targetRotation = Quaternion.LookRotation(Vector3.forward, direction);
+		targetRotation = Quaternion.LookRotation(Vector3.forward, direction);
 
 		// Interpola suavemente la rotación
 		transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * speedMove);
 
 
-		if (targetRotation.z > 0)
+		if (targetRotation.z > 0.25)
 		{
 
-			fuegoDerecha.SetActive(false);
+			fuegoDerecha.GetComponent<Fuego>().setWater(true);
 		}
+		else if (targetRotation.z < -0.25)
+			fuegoIzquierda.GetComponent<Fuego>().setWater(true);
+
 		else
 		{
 
-
-			fuegoIzquierda.SetActive(false);
+			fuegoDerecha.GetComponent<Fuego>().setWater(false);
+			fuegoIzquierda.GetComponent<Fuego>().setWater(false);
+			// fuegoIzquierda.SetActive(false);
 		}
 	}
 

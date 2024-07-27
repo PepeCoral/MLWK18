@@ -6,24 +6,15 @@ public class JarronAscenso : MonoBehaviour
 {
 
     [SerializeField] float _speed;
-
-    [SerializeField] Vector3 _startingPos;
-    [SerializeField] float _maxHeigh;
+    [SerializeField] float _minHeigh;
 
     private bool _isPlaying = true;
 
-
-    void Start()
-    {
-        transform.position = _startingPos;
-    }
-
-
     void Update()
     {
-        if (transform.position.y < _maxHeigh)
+        if (transform.position.y < _minHeigh)
         {
-            transform.position += Vector3.up * (_speed * Time.deltaTime);
+            transform.position += Vector3.down * (_speed * Time.deltaTime);
         }
         else if (_isPlaying)
         {
