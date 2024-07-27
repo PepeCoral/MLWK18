@@ -34,6 +34,7 @@ public class Fuse : MonoBehaviour, ITactilGameObject
 	public void OnPressed(InputManager InputManager, TactilInputController newTactilInputCtrl)
 	{
 		inputMan = InputManager;
+		transform.rotation = Quaternion.identity;
 	}
 
 	public void OnReleased()

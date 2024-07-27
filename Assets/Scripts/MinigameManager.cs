@@ -8,18 +8,18 @@ public class MinigameManager : MonoBehaviour {
 	[FormerlySerializedAs("TimeToFinish")]
 	[Header("Generic Options")]
 	//Time to finish this minigame once started, if this expires, the minigame has failed
-	[SerializeField] private float MinigameTimeLength = 15;
-	[SerializeField] private float CountdownToStart = 5;
-	[SerializeField] private float NextSceneTimer = 3;
+	[SerializeField] protected float MinigameTimeLength = 15;
+	[SerializeField] protected float CountdownToStart = 5;
+	[SerializeField] protected float NextSceneTimer = 3;
 	[SerializeField] SceneSwitcher Switcher;
 	
 	protected float CurrentStartCountdown;
 	protected float CurrentTimeLength;
 	protected float CurrentNextSceneTimer;
 	
-	private bool bIsMinigameTimerActive = false;
-	private bool bIsStartCountdownActive = true;
-	private bool bIsNextSceneTimerActive = false;
+	protected bool bIsMinigameTimerActive = false;
+	protected bool bIsStartCountdownActive = true;
+	protected bool bIsNextSceneTimerActive = false;
 	
 	// Use this for initialization
 	void Awake ()
