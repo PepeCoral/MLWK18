@@ -4,6 +4,5 @@ using UnityEngine;
 
 public class FuseSlot : MonoBehaviour
 {
-	[SerializeField]
 	public bool isSlotted { get; set; }
 }

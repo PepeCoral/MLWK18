@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fuse : MonoBehaviour, IGrapeable
+public class Fuse : MonoBehaviour, ITactilGameObject
 {
-
 	[SerializeField] private bool isBroken = false;
 	public bool isSlotted { get; private set; }
 	
@@ -31,7 +30,7 @@ public class Fuse : MonoBehaviour, IGrapeable
 		}
 	}
 
-	public void OnPressed(InputManager InputManager, InputController NewInputCtrl)
+	public void OnPressed(InputManager InputManager, TactilInputController newTactilInputCtrl)
 	{
 		inputMan = InputManager;
 	}
@@ -80,7 +79,7 @@ public class Fuse : MonoBehaviour, IGrapeable
 		
 	}
 
-	public bool CanBeGrapped()
+	public bool CanBeSelected()
 	{
 		return isBroken || !isSlotted;
 	}

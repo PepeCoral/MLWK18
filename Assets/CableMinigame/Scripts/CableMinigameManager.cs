@@ -1,82 +1,77 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using NUnit.Framework.Constraints;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CableMinigameManager : MonoBehaviour
+public class CableMinigameManager : MinigameManager
 {
-
-	[SerializeField] private float TimeToResolve = 15;
-	[SerializeField] private Text InformationText;
-	
-	private float currentGameTime;
-	
+	[Header("Cable Minigame Parameters")]
 	[SerializeField] private CableStartLocation[] AvailableCables;
 	[SerializeField] private Fuse[] Fuses;
 
-	private bool IsCountdownEnabled = false;
+	[Header("UI Information")] 
+	[SerializeField] private Text TimerText;
 	
-	// Use this for initialization
-	void Start ()
-	{
-		currentGameTime = TimeToResolve;
-		
-		StartMinigame();
-	}
-
-	void StartMinigame()
-	{
-		IsCountdownEnabled = true;
-	}
 	// Update is called once per frame
-	void Update () {
+	protected override void Update ()
+	{
+		base.Update();
 
-		if (IsCountdownEnabled)
+		if (IsMinigameActive())
 		{
-			currentGameTime -= Time.deltaTime;
-			InformationText.text = currentGameTime.ToString("0.00");
-			
-			if (currentGameTime <= 0)
+			if (CurrentTimeLength > 0)
 			{
-				InformationText.text = "Game Timed Out!!!";
-				currentGameTime = 0;
-				IsCountdownEnabled = false;
-				Application.Quit();
+				TimerText.text = CurrentTimeLength.ToString("0.00");
+			}
+		}
+		else
+		{
+			if (CurrentStartCountdown > 0)
+			{
+				TimerText.text = "Game about to Start " + CurrentStartCountdown;
 			}
 		}
 	}
 
-	public bool CanGameEnd()
+	protected override void OnGameTimerExpired()
 	{
-		int CorrectCables = 0;
+		base.OnGameTimerExpired();
+		
+		TimerText.text = "Game Timed Out!!!";
+	}
+	
+	public override bool CanMinigameEnd()
+	{
+		int expectedAmount = 0;
 		foreach (CableStartLocation cable in AvailableCables)
 		{
 			if (cable.isCompleted)
 			{
-				CorrectCables++;
+				expectedAmount++;
 			}
 		}
 
-		if (CorrectCables != AvailableCables.Length)
+		if (expectedAmount != AvailableCables.Length)
 		{
 			return false;
 		}
 		
-		int CorrectFuses = 0;
+		expectedAmount = 0;
 		foreach (Fuse fuse in Fuses)
 		{
 			if (fuse.isSlotted)
 			{
-				CorrectFuses++;
+				expectedAmount++;
 			}
 		}
 
-		return CorrectFuses == Fuses.Length;
+		return expectedAmount == Fuses.Length;
 	}
 
-	public void GameCompleted()
+	public override void CompleteMinigame()  
 	{
-		IsCountdownEnabled = false;
-		InformationText.text = "Game COMPLETED Out!!!";
+		base.CompleteMinigame();
+		TimerText.text = "Game COMPLETED Out!!!";
 	}
 }

@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Security.Policy;
 using UnityEngine;
 
-public class Lever : MonoBehaviour, IGrapeable
+public class Lever : MonoBehaviour, ITactilGameObject
 {
 	private InputManager InputMan;
-	private InputController InputCtrl;
+	private TactilInputController _tactilInputCtrl;
 	private bool isCompleted = false;
 
 
-	[SerializeField] private CableMinigameManager CablesManager;
+	[SerializeField] private MinigameManager MinigameManager;
 	
 	//If the touch X gets away further than this, the inputgrab gets canceled
 	[SerializeField] private float maxXArea = 30;
@@ -19,30 +19,30 @@ public class Lever : MonoBehaviour, IGrapeable
 	
 	// Update is called once per frame
 	void Update () {
-		if (InputMan && InputCtrl)
+		if (InputMan && _tactilInputCtrl)
 		{
 			if (Mathf.Abs(InputMan.TouchLocationFromLowerCam.x - transform.position.x) > maxXArea)
 			{
-				InputCtrl.DeAttach();
+				_tactilInputCtrl.DeAttach();
 			}else
 
 			if (-InputMan.TouchLocationFromLowerCam.y + transform.position.y > YTarget)
 			{
-				if (CablesManager.CanGameEnd())
+				if (MinigameManager.CanMinigameEnd())
 				{
 					isCompleted = true;
-					CablesManager.GameCompleted();
-					InputCtrl.DeAttach();
+					MinigameManager.CompleteMinigame();
+					_tactilInputCtrl.DeAttach();
 				}
 
 			}
 		}
 	}
 
-	public void OnPressed(InputManager InputManager, InputController NewInputCtrl)
+	public void OnPressed(InputManager InputManager, TactilInputController newTactilInputCtrl)
 	{
 		InputMan = InputManager;
-		InputCtrl = NewInputCtrl;
+		_tactilInputCtrl = newTactilInputCtrl;
 	}
 
 	public void OnReleased()
@@ -54,10 +54,10 @@ public class Lever : MonoBehaviour, IGrapeable
 		}
 
 		InputMan = null;
-		InputCtrl = null;
+		_tactilInputCtrl = null;
 	}
 
-	public bool CanBeGrapped()
+	public bool CanBeSelected()
 	{
 		return !isCompleted;
 	}
