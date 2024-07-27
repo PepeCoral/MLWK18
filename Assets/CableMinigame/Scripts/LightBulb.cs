@@ -5,9 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class LightBulb : MonoBehaviour
 {
-
-	[SerializeField] private Color OnColor;
-	[SerializeField] private Color OffColour;
+	
 	[SerializeField] private Image ImageToEdit;
 	[SerializeField] private bool StartsOn = false;
 	private void Awake()
@@ -24,11 +22,11 @@ public class LightBulb : MonoBehaviour
 
 	public void TurnOn()
 	{
-		ImageToEdit.color = OnColor;
+		ImageToEdit.enabled = true;
 	}
 
 	public void TurnOff()
 	{
-		ImageToEdit.color = OffColour;
+		ImageToEdit.enabled = false;
 	}
 }

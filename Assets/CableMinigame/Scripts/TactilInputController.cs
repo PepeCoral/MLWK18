@@ -58,7 +58,7 @@ public class TactilInputController : MonoBehaviour
 			{
 				ITactilGameObject TempGrappedObject = col.gameObject.GetComponent<ITactilGameObject>();
 
-				if (TempGrappedObject.CanBeSelected())
+				if (TempGrappedObject != null && TempGrappedObject.CanBeSelected())
 				{
 					GrappedObject = TempGrappedObject;
 					GrappedObject.OnPressed(InputMan, this);

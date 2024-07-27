@@ -15,6 +15,7 @@ public class JarronMinigameManager : MinigameManager
     {
         base.StartMinigame();
         _jarronAscenso.StartGame();
+        _jarronGiroscopio.StartMinigame();
     }
 
 

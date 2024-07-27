@@ -17,11 +17,11 @@ public class MinigameManager : MonoBehaviour
 	protected float CurrentStartCountdown;
 	[SerializeField] protected float CurrentTimeLength;
 	protected float CurrentNextSceneTimer;
-
+	
 	protected bool bIsMinigameTimerActive = false;
 	protected bool bIsStartCountdownActive = true;
 	protected bool bIsNextSceneTimerActive = false;
-
+	
 	// Use this for initialization
 	protected virtual void Awake()
 	{

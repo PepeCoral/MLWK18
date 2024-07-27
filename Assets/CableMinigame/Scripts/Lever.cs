@@ -35,10 +35,22 @@ public class Lever : MonoBehaviour, ITactilGameObject
 			{
 				_tactilInputCtrl.DeAttach();
 			}
-			else if (-InputMan.TouchLocationFromLowerCam.y + transform.position.y > YTarget)
+			else if (Mathf.Abs(transform.position.y - StartLocation.y) > YTarget)
 			{
 				isDownMovementCompleted = true;
 				_tactilInputCtrl.DeAttach();
+			}
+			else
+			{
+				if (InputMan.TouchLocationFromLowerCam.y >= transform.position.y)
+				{
+					return;
+				}
+				else
+				{
+					Vector3 NewLocation = new Vector3(transform.position.x, InputMan.TouchLocationFromLowerCam.y, InputMan.TouchLocationFromLowerCam.z);
+					transform.position = NewLocation;
+				}
 			}
 		}
 	}
@@ -51,30 +63,25 @@ public class Lever : MonoBehaviour, ITactilGameObject
 
 	public void OnReleased()
 	{
+		InputMan = null;
+		_tactilInputCtrl = null;
+		
 		if (isDownMovementCompleted)
 		{
 			if (MinigameManager.CanMinigameEnd())
 			{
 				lightBulb.TurnOn();
 				MinigameManager.CompleteMinigame();
-
 			}
 			else
 			{
 				StartCoroutine(FailedToTurnOn());
 			}
 		}
-
-
-		if (isDownMovementCompleted)
+		else
 		{
-			//CHECK END CONDITIONS
-
-			transform.position = transform.position + Vector3.down * YTarget;
+			transform.position = StartLocation;
 		}
-
-		InputMan = null;
-		_tactilInputCtrl = null;
 	}
 
 	public bool CanBeSelected()

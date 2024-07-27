@@ -12,6 +12,8 @@ public class CableMinigameManager : MinigameManager
     [Header("UI Information")]
     [SerializeField] private Text TimerText;
 
+    [SerializeField] private Slider TimerSlider;
+
     // Update is called once per frame
     protected override void Update()
     {
@@ -22,6 +24,7 @@ public class CableMinigameManager : MinigameManager
             if (CurrentTimeLength > 0)
             {
                 TimerText.text = CurrentTimeLength.ToString("0.00");
+                TimerSlider.value = 1 - (CurrentTimeLength/MinigameTimeLength);
             }
         }
         else
