@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.N3DS;
 
 public class JarronGiroscopio : MonoBehaviour
 {
@@ -37,6 +38,12 @@ public class JarronGiroscopio : MonoBehaviour
     {
         float yRotation = gyro.attitude.eulerAngles.y;
 
+        var rotation2 = GamePad.CirclePad.y;
+        
+        if (rotation2 > 0.5f)
+            return 1;
+        if (rotation2 < -0.5f)
+            return -1;
 
 #if UNITY_EDITOR
         return (int)Input.GetAxisRaw("Horizontal");
