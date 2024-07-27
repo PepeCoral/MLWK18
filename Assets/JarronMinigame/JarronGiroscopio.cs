@@ -7,7 +7,7 @@ using Debug = UnityEngine.Debug;
 public class JarronGiroscopio : MonoBehaviour
 {
     Gyroscope gyro;
-    
+
     [SerializeField] private float threshold = 10;
     [SerializeField] private float torque = 10;
     Rigidbody2D rb;
@@ -22,7 +22,7 @@ public class JarronGiroscopio : MonoBehaviour
     private void Update()
     {
         var input = GetInputGyro();
-        
+
         if (input == 1)
         {
             rb.AddTorque(torque, ForceMode2D.Force);
@@ -31,10 +31,10 @@ public class JarronGiroscopio : MonoBehaviour
         {
             rb.AddTorque(-torque, ForceMode2D.Force);
         }
-        
-        if(rb.gameObject.transform.rotation.eulerAngles.z > 90 && rb.gameObject.transform.rotation.eulerAngles.z < 270)
+
+        if (rb.gameObject.transform.rotation.eulerAngles.z > 90 && rb.gameObject.transform.rotation.eulerAngles.z < 270)
         {
-            Debug.Log("destrucción");
+            //JarronMinigameManager.C
         }
     }
 
@@ -43,7 +43,7 @@ public class JarronGiroscopio : MonoBehaviour
         float yRotation = gyro.attitude.eulerAngles.y;
 
         var rotation2 = GamePad.CirclePad.y;
-        
+
         if (rotation2 > 0.5f)
             return 1;
         if (rotation2 < -0.5f)
@@ -52,13 +52,18 @@ public class JarronGiroscopio : MonoBehaviour
 #if UNITY_EDITOR
         return (int)Input.GetAxisRaw("Horizontal");
 #endif
-        
+
         yRotation %= 360;
 
-        if(yRotation > threshold && yRotation < 180)
+        if (yRotation > threshold && yRotation < 180)
             return 1;
         if (yRotation < 360 - threshold && yRotation > 180)
             return -1;
         return 0;
+    }
+
+    public void CompleteMinigame()
+    {
+
     }
 }
