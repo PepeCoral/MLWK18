@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 
 public class OnTriggerOpenLevel : MonoBehaviour
@@ -18,6 +19,7 @@ public class OnTriggerOpenLevel : MonoBehaviour
 	{
 		if (other.gameObject.tag == "Player")
 		{
+			other.gameObject.GetComponent<PlayerMovement>().enabled = false;
 			switcher.SwitchToNextScene();
 		}
 	}
