@@ -10,7 +10,7 @@ public class Blowing : MonoBehaviour
 {
     private string deviceName;
 
-    private float clipLength = 1f;
+    private float clipLength = 0.9f;
     
     private float currentClipLength;
     
@@ -18,9 +18,12 @@ public class Blowing : MonoBehaviour
     private bool isRecording;
 
     private AudioClip clip;
+    private SpriteRenderer spriteRenderer;
 
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.enabled = false;
 #if UNITY_N3DS
         UnityEngine.N3DS.Microphone.Enable();
 #endif
@@ -48,7 +51,9 @@ public class Blowing : MonoBehaviour
         if (isBlowing)
         {
             Debug.Log("Blowing");
+            
         }
+        spriteRenderer.enabled = isBlowing;
     }
 
     private bool ReadData()
