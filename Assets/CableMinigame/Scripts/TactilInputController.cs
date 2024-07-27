@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputController : MonoBehaviour
+public class TactilInputController : MonoBehaviour
 {
 	[SerializeField] private LayerMask GrapableLayerMask;
+	[SerializeField] private MinigameManager MinigameManager;
 	
 	private InputManager InputMan;
-	private IGrapeable GrappedObject;
+	private ITactilGameObject GrappedObject;
 	
 	// Use this for initialization
 	void Awake () {
@@ -17,6 +18,12 @@ public class InputController : MonoBehaviour
 	// Update is called once per frame
 	void Update () {
 
+		if (!MinigameManager.IsMinigameActive())
+		{
+			DeAttach();
+			return;
+		}
+		
 		if (InputMan.TouchPressedThisFrame)
 		{
 			TryGetObject();
@@ -26,12 +33,17 @@ public class InputController : MonoBehaviour
 		{
 			DeAttach();
 		}
+
+
 	}
 
 	public void DeAttach()
 	{
-		GrappedObject.OnReleased();
-		GrappedObject = null;
+		if (GrappedObject != null)
+		{
+			GrappedObject.OnReleased();
+			GrappedObject = null;
+		}
 	}
 
 	private void TryGetObject()
@@ -44,9 +56,9 @@ public class InputController : MonoBehaviour
 		{
 			if (col)
 			{
-				IGrapeable TempGrappedObject = col.gameObject.GetComponent<IGrapeable>();
+				ITactilGameObject TempGrappedObject = col.gameObject.GetComponent<ITactilGameObject>();
 
-				if (TempGrappedObject.CanBeGrapped())
+				if (TempGrappedObject.CanBeSelected())
 				{
 					GrappedObject = TempGrappedObject;
 					GrappedObject.OnPressed(InputMan, this);
