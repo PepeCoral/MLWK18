@@ -11,7 +11,9 @@ public class JarronGiroscopio : MonoBehaviour
     [SerializeField] private float threshold = 10;
     [SerializeField] private float torque = 10;
     Rigidbody2D rb;
+    [SerializeField] private JarronAscenso jarronAscenso;
 
+    [SerializeField] GameObject join;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -34,7 +36,7 @@ public class JarronGiroscopio : MonoBehaviour
 
         if (rb.gameObject.transform.rotation.eulerAngles.z > 90 && rb.gameObject.transform.rotation.eulerAngles.z < 270)
         {
-            //JarronMinigameManager.C
+            JarronFall();
         }
     }
 
@@ -65,5 +67,10 @@ public class JarronGiroscopio : MonoBehaviour
     public void CompleteMinigame()
     {
 
+    }
+
+    public void JarronFall()
+    {
+        join.SetActive(false);
     }
 }
