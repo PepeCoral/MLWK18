@@ -52,19 +52,19 @@ public class PlayerMovement : MonoBehaviour
         }
 
         input = input.normalized;
-        
+
 
 
         rb.velocity = input * (_speed * Time.deltaTime);
-        
+
         animator.SetBool("isMoving", rb.velocity != Vector2.zero);
-        
+
         Vector2 velocityNormalized = rb.velocity.normalized;
 
         if (input != Vector2.zero)
         {
             animator.SetFloat("Vertical", velocityNormalized.y);
-            animator.SetFloat("Horizontal", velocityNormalized.x);   
+            animator.SetFloat("Horizontal", velocityNormalized.x);
         }
     }
 
