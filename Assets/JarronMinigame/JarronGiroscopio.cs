@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.N3DS;
+using Debug = UnityEngine.Debug;
 
 public class JarronGiroscopio : MonoBehaviour
 {
@@ -24,14 +25,17 @@ public class JarronGiroscopio : MonoBehaviour
         
         if (input == 1)
         {
-            rb.AddTorque(torque);
+            rb.AddTorque(torque, ForceMode2D.Force);
         }
         else if (input == -1)
         {
-            rb.AddTorque(-torque);
+            rb.AddTorque(-torque, ForceMode2D.Force);
         }
         
-        
+        if(rb.gameObject.transform.rotation.eulerAngles.z > 90 && rb.gameObject.transform.rotation.eulerAngles.z < 270)
+        {
+            Debug.Log("destrucción");
+        }
     }
 
     private int GetInputGyro()
