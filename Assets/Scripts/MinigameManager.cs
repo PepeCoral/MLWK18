@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class MinigameManager : MonoBehaviour {
-	
+public class MinigameManager : MonoBehaviour
+{
+
 	[FormerlySerializedAs("TimeToFinish")]
 	[Header("Generic Options")]
 	//Time to finish this minigame once started, if this expires, the minigame has failed
@@ -12,9 +13,9 @@ public class MinigameManager : MonoBehaviour {
 	[SerializeField] protected float CountdownToStart = 5;
 	[SerializeField] protected float NextSceneTimer = 3;
 	[SerializeField] SceneSwitcher Switcher;
-	
+
 	protected float CurrentStartCountdown;
-	protected float CurrentTimeLength;
+	[SerializeField] protected float CurrentTimeLength;
 	protected float CurrentNextSceneTimer;
 	
 	protected bool bIsMinigameTimerActive = false;
@@ -22,7 +23,7 @@ public class MinigameManager : MonoBehaviour {
 	protected bool bIsNextSceneTimerActive = false;
 	
 	// Use this for initialization
-	void Awake ()
+	protected virtual void Awake()
 	{
 		CurrentTimeLength = MinigameTimeLength;
 		CurrentStartCountdown = CountdownToStart;
@@ -33,9 +34,10 @@ public class MinigameManager : MonoBehaviour {
 	{
 		bIsMinigameTimerActive = true;
 	}
-	
+
 	// Update is called once per frame
-	protected virtual void Update () {
+	protected virtual void Update()
+	{
 		if (bIsMinigameTimerActive)
 		{
 			CurrentTimeLength -= Time.deltaTime;
@@ -55,11 +57,11 @@ public class MinigameManager : MonoBehaviour {
 			{
 				CurrentStartCountdown = 0;
 				bIsStartCountdownActive = false;
-				
+
 				StartMinigame();
 			}
 		}
-		
+
 		if (bIsNextSceneTimerActive)
 		{
 			CurrentNextSceneTimer -= Time.deltaTime;
@@ -68,7 +70,7 @@ public class MinigameManager : MonoBehaviour {
 			{
 				CurrentNextSceneTimer = 0;
 				bIsNextSceneTimerActive = false;
-				
+
 				Switcher.SwitchToNextScene();
 			}
 		}
@@ -79,7 +81,7 @@ public class MinigameManager : MonoBehaviour {
 		bIsMinigameTimerActive = false;
 		bIsNextSceneTimerActive = true;
 	}
-	
+
 	public virtual bool IsMinigameActive()
 	{
 		return bIsMinigameTimerActive;

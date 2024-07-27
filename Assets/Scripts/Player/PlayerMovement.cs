@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private bool havePenalty = false;
     private Vector2 input;
 
-    private Animator animator;
+    private  Animator animator;
 
     private Rigidbody2D rb;
     [SerializeField] float _speed;
@@ -19,8 +19,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Awake()
     {
-        animator = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody2D>();
+        animator = this.GetComponent<Animator>();
+        rb =  this.GetComponent<Rigidbody2D>();
     }
 
     void Update()

@@ -19,11 +19,14 @@ public class MoverExtintor : MonoBehaviour
 	public GameObject fuegoIzquierda;
 
 	[SerializeField] private Quaternion targetRotation;
+	public GameObject manager;
 
+	bool started = false;
 	AudioSource source;
 	private void Awake()
 	{
 		inputManager = input.GetComponent<InputManager>();
+
 	}
 	void Start()
 	{
@@ -33,52 +36,54 @@ public class MoverExtintor : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		position = inputManager.GetPosition();
-		// Debug.Log("Mirilla" + position.x + " " + position.y);
-		var step = speedMove * Time.deltaTime; // calculate distance to move
-		Vector3 newPosition;
-		if (position.x > 0 || position.y > 0)
+
+		started = manager.GetComponent<Humo>().GetStartMinigame();
+		if (started)
 		{
+			position = inputManager.GetPosition();
+			// Debug.Log("Mirilla" + position.x + " " + position.y);
+			var step = speedMove * Time.deltaTime; // calculate distance to move
+			Vector3 newPosition;
+			if (position.x > 0 || position.y > 0)
+			{
 
-			newPosition = UpperCamera.ScreenToWorldPoint(new Vector3(position.x, position.y, 0));
+				newPosition = UpperCamera.ScreenToWorldPoint(new Vector3(position.x, position.y, 0));
 
-		}
-		else
-		{
-
-			newPosition = new Vector3(0, 0, 0);
-
-
-		}
-
-		// float rotation = newPosition.x * Time.deltaTime * speedMove;
-
-		// rotation = Vector3.Angle(position, newPosition);
-		// transform.rotation = Quaternion.Euler(0, 0, rotation);
-
-		Vector3 direction = (newPosition - transform.position).normalized;
-
-		// Calcula la rotación hacia la nueva dirección
-		targetRotation = Quaternion.LookRotation(Vector3.forward, direction);
-
-		// Interpola suavemente la rotación
-		transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * speedMove);
+			}
+			else
+			{
+				newPosition = new Vector3(0, 0, 0);
+			}
 
 
-		if (targetRotation.z > 0.25)
-		{
 
-			fuegoDerecha.GetComponent<Fuego>().setWater(true);
-		}
-		else if (targetRotation.z < -0.25)
-			fuegoIzquierda.GetComponent<Fuego>().setWater(true);
+			Vector3 direction = (newPosition - transform.position).normalized;
 
-		else
-		{
+			// Calcula la rotación hacia la nueva dirección
+			targetRotation = Quaternion.LookRotation(Vector3.forward, direction);
 
-			fuegoDerecha.GetComponent<Fuego>().setWater(false);
-			fuegoIzquierda.GetComponent<Fuego>().setWater(false);
-			// fuegoIzquierda.SetActive(false);
+			// Interpola suavemente la rotación
+			transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * speedMove);
+
+
+			if (targetRotation.z >= 0.25f)
+			{
+
+				fuegoDerecha.GetComponent<Fuego>().setWater(true);
+				fuegoIzquierda.GetComponent<Fuego>().setWater(false);
+			}
+			else if (targetRotation.z <= -0.25f)
+			{
+				fuegoIzquierda.GetComponent<Fuego>().setWater(true);
+				fuegoDerecha.GetComponent<Fuego>().setWater(false);
+			}
+			else
+			{
+
+				fuegoDerecha.GetComponent<Fuego>().setWater(false);
+				fuegoIzquierda.GetComponent<Fuego>().setWater(false);
+				// fuegoIzquierda.SetActive(false);
+			}
 		}
 	}
 
