@@ -15,7 +15,7 @@ public class JarronGiroscopio : MonoBehaviour
     [SerializeField] private JarronMinigameManager manager;
     [SerializeField] GameObject join;
     [SerializeField] private float gravityScale;
-    [SerializeField] private AudioSource audio;
+    [SerializeField] private AudioSource _audio;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -89,7 +89,7 @@ public class JarronGiroscopio : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col)
     {
         manager.CompleteMinigame();
-        audio.Play();
+        _audio.Play();
 
 
     }

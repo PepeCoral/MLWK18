@@ -4,17 +4,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Shaking : MonoBehaviour {
-	Gyroscope gyro = Input.gyro;
+	Gyroscope gyro;
 	public bool isShaking = false;
+	
+	CastigoHumo castigoHumo;
 
 	private void Start()
 	{
-		Input.gyro.enabled = true;
+		gyro = Input.gyro;
+		gyro.enabled = true;
+		
+		castigoHumo = GetComponent<CastigoHumo>();
 	}
 
 	private void Update()
 	{
 		isShaking = DetectShaking();
+		
+		castigoHumo.blow = isShaking;
 	}
 
 	private bool DetectShaking()
