@@ -8,7 +8,7 @@ using UnityEngine.N3DS;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
-    private bool havePenalty = false;
+    [SerializeField] private bool havePenalty = false;
     private Vector2 input;
 
     private  Animator animator;
