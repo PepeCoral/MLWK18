@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
 
 public class Blowing : MonoBehaviour
@@ -27,9 +22,7 @@ public class Blowing : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.enabled = false;
-#if UNITY_N3DS
         UnityEngine.N3DS.Microphone.Enable();
-#endif
         deviceName = Microphone.devices[0];
     }
 
