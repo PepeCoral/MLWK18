@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
+
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
 
 public class Blowing : MonoBehaviour
@@ -14,9 +10,9 @@ public class Blowing : MonoBehaviour
     private readonly float clipLength = 0.9f;
 
     private float debugMean;
-    
+
     private float currentClipLength;
-    
+
     private bool isBlowing;
     private bool isRecording;
 
@@ -35,59 +31,59 @@ public class Blowing : MonoBehaviour
 
     private void Update()
     {
-        if(currentClipLength == 0)
+        if (currentClipLength == 0)
         {
             StartRecording();
             isRecording = true;
         }
-        else if(currentClipLength >= clipLength)
+        else if (currentClipLength >= clipLength)
         {
             EndRecording();
             isRecording = false;
             currentClipLength = 0;
             isBlowing = ReadData();
         }
-        
-        if(isRecording)
+
+        if (isRecording)
             currentClipLength += Time.deltaTime;
-        
+
         if (isBlowing)
         {
             Debug.Log("Blowing");
-            
+
         }
         spriteRenderer.enabled = isBlowing;
     }
-    
+
     // gui that displays a number
     private void OnGUI()
     {
         GUI.Label(new Rect(10, 10, 100, 20), debugMean.ToString());
     }
 
-    
+
 
     private bool ReadData()
     {
         var data = new float[clip.samples * clip.channels];
         clip.GetData(data, 0);
-        
+
         float mean = data.Select(Math.Abs).Sum();
 
         mean /= data.Length;
-        
+
         debugMean = mean;
 
         return mean > 0.04f;
     }
-    
+
     private void StartRecording()
     {
         int lengthSeconds = 1;
         int frequency = 32728;
         clip = Microphone.Start(deviceName, false, lengthSeconds, frequency);
     }
-    
+
     private void EndRecording()
     {
         Microphone.End(deviceName);
