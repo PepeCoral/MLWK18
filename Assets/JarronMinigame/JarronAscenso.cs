@@ -27,7 +27,7 @@ public class JarronAscenso : MonoBehaviour
         {
             print("terminado");
             _isPlaying = false;
-            _jarronGiroscopio.JarronFall();
+            _jarronGiroscopio.FallCorrect();
         }
 
 
