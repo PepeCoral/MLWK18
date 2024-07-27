@@ -13,8 +13,7 @@ public class JarronAscenso : MonoBehaviour
 
 
     private bool _isPlaying = false;
-    private bool _isFalling = false;
-    private bool _hasFalled = false;
+
 
     [SerializeField] JarronMinigameManager _manager;
 
