@@ -19,11 +19,6 @@ public class ScaleTween : MonoBehaviour
 			StartTween();
 		}
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
 	public void StartTween()
 	{

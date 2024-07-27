@@ -10,8 +10,6 @@ public class CableMinigameManager : MinigameManager
     [SerializeField] private Fuse[] Fuses;
 
     [Header("UI Information")]
-    [SerializeField] private Text TimerText;
-
     [SerializeField] private Slider TimerSlider;
 
     // Update is called once per frame
@@ -23,15 +21,7 @@ public class CableMinigameManager : MinigameManager
         {
             if (CurrentTimeLength > 0)
             {
-                TimerText.text = CurrentTimeLength.ToString("0.00");
                 TimerSlider.value = 1 - (CurrentTimeLength/MinigameTimeLength);
-            }
-        }
-        else
-        {
-            if (CurrentStartCountdown > 0)
-            {
-                TimerText.text = "Game about to Start " + CurrentStartCountdown;
             }
         }
     }
@@ -39,8 +29,6 @@ public class CableMinigameManager : MinigameManager
     protected override void OnGameTimerExpired()
     {
         base.OnGameTimerExpired();
-
-        TimerText.text = "Game Timed Out!!!";
     }
 
     public override bool CanMinigameEnd()
@@ -74,6 +62,5 @@ public class CableMinigameManager : MinigameManager
     public override void CompleteMinigame()
     {
         base.CompleteMinigame();
-        TimerText.text = "Game COMPLETED Out!!!";
     }
 }

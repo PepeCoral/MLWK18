@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class MinigameManager : MonoBehaviour
 {
@@ -12,10 +13,16 @@ public class MinigameManager : MonoBehaviour
 	[SerializeField] protected float MinigameTimeLength = 15;
 	[SerializeField] protected float CountdownToStart = 5;
 	[SerializeField] protected float NextSceneTimer = 3;
-	[SerializeField] SceneSwitcher Switcher;
-
+	[SerializeField] string SceneSwitcherTag = "SceneSwitcher";
+	SceneSwitcher Switcher;
+	
+	[Header("Pre Game Menu")]
+	//Time to finish this minigame once started, if this expires, the minigame has failed
+	[SerializeField] Text CountDownText;
+	[SerializeField] CanvasGroup CountdownImageContainer;
+	
 	protected float CurrentStartCountdown;
-	[SerializeField] protected float CurrentTimeLength;
+	protected float CurrentTimeLength;
 	protected float CurrentNextSceneTimer;
 	
 	protected bool bIsMinigameTimerActive = false;
@@ -28,6 +35,11 @@ public class MinigameManager : MonoBehaviour
 		CurrentTimeLength = MinigameTimeLength;
 		CurrentStartCountdown = CountdownToStart;
 		CurrentNextSceneTimer = NextSceneTimer;
+	}
+
+	protected virtual void Start()
+	{
+		Switcher = GameObject.FindGameObjectWithTag(SceneSwitcherTag).GetComponent<SceneSwitcher>();
 	}
 
 	protected virtual void StartMinigame()
@@ -52,9 +64,18 @@ public class MinigameManager : MonoBehaviour
 		if (bIsStartCountdownActive)
 		{
 			CurrentStartCountdown -= Time.deltaTime;
-
+			
+			CountDownText.text = CurrentStartCountdown.ToString("0");
+			
+			if (CurrentStartCountdown <= 1)
+			{
+				CountdownImageContainer.alpha = CurrentStartCountdown / 1;
+			}
+			
 			if (CurrentStartCountdown <= 0)
 			{
+				CountdownImageContainer.alpha = 0;
+				
 				CurrentStartCountdown = 0;
 				bIsStartCountdownActive = false;
 
