@@ -12,11 +12,15 @@ public class JarronGiroscopio : MonoBehaviour
     [SerializeField] private float torque = 10;
     Rigidbody2D rb;
     [SerializeField] private JarronAscenso jarronAscenso;
-
+    [SerializeField] private JarronMinigameManager manager;
     [SerializeField] GameObject join;
+    [SerializeField] private float gravityScale;
+    [SerializeField] private AudioSource audio;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        rb.gravityScale = 0;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         gyro = Input.gyro;
         gyro.enabled = true;
     }
@@ -38,6 +42,8 @@ public class JarronGiroscopio : MonoBehaviour
         {
             JarronFall();
         }
+
+
     }
 
     private int GetInputGyro()
@@ -69,8 +75,22 @@ public class JarronGiroscopio : MonoBehaviour
 
     }
 
+    public void StartMinigame()
+    {
+        rb.gravityScale = gravityScale;
+        rb.constraints = RigidbodyConstraints2D.None;
+    }
+
     public void JarronFall()
     {
         join.SetActive(false);
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        manager.CompleteMinigame();
+        audio.Play();
+
+
     }
 }
