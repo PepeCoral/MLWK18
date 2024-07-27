@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.N3DS;
-using Debug = UnityEngine.Debug;
+using DG.Tweening;
 
 public class JarronGiroscopio : MonoBehaviour
 {
@@ -16,6 +16,11 @@ public class JarronGiroscopio : MonoBehaviour
     [SerializeField] GameObject join;
     [SerializeField] private float gravityScale;
     [SerializeField] private AudioSource _audio;
+
+    [SerializeField] private Vector3 finalRotation;
+
+    [SerializeField] private Vector3 leftSide;
+    [SerializeField] private Vector3 rightSide;
     private bool falling = false;
     private void Start()
     {
@@ -42,6 +47,7 @@ public class JarronGiroscopio : MonoBehaviour
 
         if (rb.gameObject.transform.rotation.eulerAngles.z > 90 && rb.gameObject.transform.rotation.eulerAngles.z < 270)
         {
+
             JarronFall();
         }
 
@@ -85,8 +91,27 @@ public class JarronGiroscopio : MonoBehaviour
 
     public void JarronFall()
     {
+        rb.bodyType = RigidbodyType2D.Dynamic;
         falling = true;
         join.SetActive(false);
+    }
+
+    public void FallCorrect()
+    {
+        rb.bodyType = RigidbodyType2D.Static;
+        falling = true;
+
+
+        Sequence sec = DOTween.Sequence();
+        sec.Append(transform.DORotate(finalRotation, 1));
+        sec.AppendInterval(1);
+        sec.Append(transform.DORotate(leftSide, 0.3f).SetEase(Ease.InOutExpo));
+        sec.Append(transform.DORotate(rightSide, 0.4f).SetEase(Ease.Linear));
+        sec.Append(transform.DORotate(leftSide, 0.4f).SetEase(Ease.Linear));
+        sec.Append(transform.DORotate(rightSide, 0.4f).SetEase(Ease.Linear));
+        sec.Append(transform.DORotate(leftSide, 0.4f).SetEase(Ease.Linear));
+        sec.AppendCallback(() => { JarronFall(); });
+
     }
 
     void OnTriggerEnter2D(Collider2D col)
