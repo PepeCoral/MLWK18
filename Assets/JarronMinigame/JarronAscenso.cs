@@ -8,7 +8,15 @@ public class JarronAscenso : MonoBehaviour
     [SerializeField] float _speed;
     [SerializeField] float _minHeigh;
 
+    [SerializeField] JarronGiroscopio _jarronGiroscopio;
+
+
+
     private bool _isPlaying = false;
+    private bool _isFalling = false;
+    private bool _hasFalled = false;
+
+    [SerializeField] JarronMinigameManager _manager;
 
     void Update()
     {
@@ -20,7 +28,10 @@ public class JarronAscenso : MonoBehaviour
         {
             print("terminado");
             _isPlaying = false;
+            _jarronGiroscopio.JarronFall();
         }
+
+
 
     }
 
@@ -34,9 +45,15 @@ public class JarronAscenso : MonoBehaviour
         _isPlaying = false;
     }
 
-    public void JarronFall()
+
+
+    private void PlaySound()
+
     {
+        _manager.CompleteMinigame();
     }
+
+
 
 
 }
