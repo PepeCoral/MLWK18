@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using UnityEditor;
@@ -10,7 +11,9 @@ public class Blowing : MonoBehaviour
 {
     private string deviceName;
 
-    private float clipLength = 0.9f;
+    private readonly float clipLength = 0.9f;
+
+    private float debugMean;
     
     private float currentClipLength;
     
@@ -55,6 +58,14 @@ public class Blowing : MonoBehaviour
         }
         spriteRenderer.enabled = isBlowing;
     }
+    
+    // gui that displays a number
+    private void OnGUI()
+    {
+        GUI.Label(new Rect(10, 10, 100, 20), debugMean.ToString());
+    }
+
+    
 
     private bool ReadData()
     {
@@ -64,6 +75,8 @@ public class Blowing : MonoBehaviour
         float mean = data.Select(Math.Abs).Sum();
 
         mean /= data.Length;
+        
+        debugMean = mean;
 
         return mean > 0.04f;
     }
