@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 13177a8b138ab96408a3e6be888c2486
+guid: 4ff86dbe5cbbcef4d9928f99854e325d
 timeCreated: 1722137915
 licenseType: Pro
 TextureImporter:
@@ -27,14 +27,14 @@ TextureImporter:
   textureFormat: 1
   maxTextureSize: 2048
   textureSettings:
-    filterMode: 1
+    filterMode: 0
     aniso: -1
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -67,7 +67,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
   - buildTarget: Nintendo 3DS
-    maxTextureSize: 512
+    maxTextureSize: 2048
     textureFormat: 60
     textureCompression: 1
     compressionQuality: 50
