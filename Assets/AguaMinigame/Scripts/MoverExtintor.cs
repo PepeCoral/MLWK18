@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MoverExtintor : MonoBehaviour
@@ -13,10 +14,11 @@ public class MoverExtintor : MonoBehaviour
 	private InputManager inputManager;
 	[SerializeField] private float speedMove = 20f;
 
+	[SerializeField] private LayerMask FireMask;
+	
 	public Camera UpperCamera;
 
-	public GameObject fuegoDerecha;
-	public GameObject fuegoIzquierda;
+	public List<Fuego> FiresHit;
 
 	[SerializeField] private Quaternion targetRotation;
 	public GameObject manager;
@@ -64,25 +66,27 @@ public class MoverExtintor : MonoBehaviour
 
 			// Interpola suavemente la rotación
 			transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * speedMove);
+			
+			RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up, 1000, FireMask);
+			Debug.DrawRay(transform.position, transform.up, Color.red, 10);
 
-
-			if (targetRotation.z >= 0.25f)
+			Fuego FireHitThisFrame = null;
+			if (hit)
 			{
-
-				fuegoDerecha.GetComponent<Fuego>().setWater(true);
-				fuegoIzquierda.GetComponent<Fuego>().setWater(false);
+				FireHitThisFrame = hit.transform.GetComponent<Fuego>();
+				FireHitThisFrame.setWater(true);
+				if (!FiresHit.Contains(FireHitThisFrame))
+				{
+					FiresHit.Add(FireHitThisFrame);
+				}
 			}
-			else if (targetRotation.z <= -0.25f)
+			
+			foreach (Fuego AvailableFire in FiresHit)
 			{
-				fuegoIzquierda.GetComponent<Fuego>().setWater(true);
-				fuegoDerecha.GetComponent<Fuego>().setWater(false);
-			}
-			else
-			{
-
-				fuegoDerecha.GetComponent<Fuego>().setWater(false);
-				fuegoIzquierda.GetComponent<Fuego>().setWater(false);
-				// fuegoIzquierda.SetActive(false);
+				if (FireHitThisFrame != null && AvailableFire != FireHitThisFrame)
+				{
+					AvailableFire.setWater(false);
+				}
 			}
 		}
 	}
