@@ -34,17 +34,17 @@ public class MainMenu : MonoBehaviour
 	{
 		if (Input.GetKeyDown(KeyCode.Space) || GamePad.GetButtonTrigger(N3dsButton.A))
 		{
-			if (bombillaAnimation != null)
-			{
-				StartGame();
-			}
+			StartGame();
 		}
 	}
 
 
 	public void StartGame()
 	{
-		StartCoroutine(WaitForAnimationAndSwitchScene());
+		if (bombillaAnimation != null)
+		{
+			StartCoroutine(WaitForAnimationAndSwitchScene());
+		}
 	}
 	private IEnumerator WaitForAnimationAndSwitchScene()
 	{
