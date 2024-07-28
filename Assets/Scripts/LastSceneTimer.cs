@@ -8,6 +8,8 @@ public class LastSceneTimer : MonoBehaviour
 	[SerializeField] private float TimeToEndGame = 10;
 
 	private float CurrentTimeToEndGame;
+
+	private bool timerEnabled;
 	// Use this for initialization
 	void Awake ()
 	{
@@ -18,11 +20,11 @@ public class LastSceneTimer : MonoBehaviour
 	void Update () {
 		CurrentTimeToEndGame -= Time.deltaTime;
 
-		if (CurrentTimeToEndGame <= 0)
+		if (timerEnabled && CurrentTimeToEndGame <= 0)
 		{
+			timerEnabled = false;
 			CurrentTimeToEndGame = 0;
 			SceneSwitcher.Instance.SwitchToNextScene();
-			enabled = false;
 		}
 	}
 }
