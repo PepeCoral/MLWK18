@@ -50,7 +50,6 @@ public class SceneSwitcher : MonoBehaviour
 
     private IEnumerator FadeToScene(int sceneIndex)
     {
-        Debug.Log("To scene: " + sceneIndex);
         yield return FadeOut();
         SceneManager.LoadScene(sceneIndex);
         yield return FadeIn();
