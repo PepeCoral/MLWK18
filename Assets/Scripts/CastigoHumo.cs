@@ -72,26 +72,26 @@ public class CastigoHumo : MonoBehaviour
 			smoking = false;
 		}
 		
-		humoPart1.transform.position = Vector3.Lerp(humoPart1.GetComponent<ParteHumo>().initPosition, humoPart1.GetComponent<ParteHumo>().endPosition, f);
-		humoPart2.transform.position = Vector3.Lerp(humoPart2.GetComponent<ParteHumo>().initPosition, humoPart2.GetComponent<ParteHumo>().endPosition, f);
-		humoPart3.transform.position = Vector3.Lerp(humoPart3.GetComponent<ParteHumo>().initPosition, humoPart3.GetComponent<ParteHumo>().endPosition, f);
-		humoPart4.transform.position = Vector3.Lerp(humoPart4.GetComponent<ParteHumo>().initPosition, humoPart4.GetComponent<ParteHumo>().endPosition, f);
-		humoPart5.transform.position = Vector3.Lerp(humoPart5.GetComponent<ParteHumo>().initPosition, humoPart5.GetComponent<ParteHumo>().endPosition, f);
-		humoPart6.transform.position = Vector3.Lerp(humoPart6.GetComponent<ParteHumo>().initPosition, humoPart6.GetComponent<ParteHumo>().endPosition, f);
-		humoPart7.transform.position = Vector3.Lerp(humoPart7.GetComponent<ParteHumo>().initPosition, humoPart7.GetComponent<ParteHumo>().endPosition, f);
-		humoPart8.transform.position = Vector3.Lerp(humoPart8.GetComponent<ParteHumo>().initPosition, humoPart8.GetComponent<ParteHumo>().endPosition, f);
+		humoPart1.transform.localPosition = Vector3.Lerp(humoPart1.GetComponent<ParteHumo>().initPosition, humoPart1.GetComponent<ParteHumo>().endPosition, f);
+		humoPart2.transform.localPosition = Vector3.Lerp(humoPart2.GetComponent<ParteHumo>().initPosition, humoPart2.GetComponent<ParteHumo>().endPosition, f);
+		humoPart3.transform.localPosition = Vector3.Lerp(humoPart3.GetComponent<ParteHumo>().initPosition, humoPart3.GetComponent<ParteHumo>().endPosition, f);
+		humoPart4.transform.localPosition = Vector3.Lerp(humoPart4.GetComponent<ParteHumo>().initPosition, humoPart4.GetComponent<ParteHumo>().endPosition, f);
+		humoPart5.transform.localPosition = Vector3.Lerp(humoPart5.GetComponent<ParteHumo>().initPosition, humoPart5.GetComponent<ParteHumo>().endPosition, f);
+		humoPart6.transform.localPosition = Vector3.Lerp(humoPart6.GetComponent<ParteHumo>().initPosition, humoPart6.GetComponent<ParteHumo>().endPosition, f);
+		humoPart7.transform.localPosition = Vector3.Lerp(humoPart7.GetComponent<ParteHumo>().initPosition, humoPart7.GetComponent<ParteHumo>().endPosition, f);
+		humoPart8.transform.localPosition = Vector3.Lerp(humoPart8.GetComponent<ParteHumo>().initPosition, humoPart8.GetComponent<ParteHumo>().endPosition, f);
 	}
 
 	private void ActivateSmoke()
 	{
-		humoPart1.transform.DOMove(humoPart1.GetComponent<ParteHumo>().initPosition, 2f).SetEase(Ease.Linear);
-		humoPart2.transform.DOMove(humoPart2.GetComponent<ParteHumo>().initPosition, 2f).SetEase(Ease.Linear);
-		humoPart3.transform.DOMove(humoPart3.GetComponent<ParteHumo>().initPosition, 2f).SetEase(Ease.Linear);
-		humoPart4.transform.DOMove(humoPart4.GetComponent<ParteHumo>().initPosition, 2f).SetEase(Ease.Linear);
-		humoPart5.transform.DOMove(humoPart5.GetComponent<ParteHumo>().initPosition, 2f).SetEase(Ease.Linear);
-		humoPart6.transform.DOMove(humoPart6.GetComponent<ParteHumo>().initPosition, 2f).SetEase(Ease.Linear);
-		humoPart7.transform.DOMove(humoPart7.GetComponent<ParteHumo>().initPosition, 2f).SetEase(Ease.Linear);
-		humoPart8.transform.DOMove(humoPart8.GetComponent<ParteHumo>().initPosition, 2f).SetEase(Ease.Linear).OnComplete(() => activationCompleted = true);
+		humoPart1.transform.DOLocalMove(humoPart1.GetComponent<ParteHumo>().initPosition, 2f).SetEase(Ease.Linear);
+		humoPart2.transform.DOLocalMove(humoPart2.GetComponent<ParteHumo>().initPosition, 2f).SetEase(Ease.Linear);
+		humoPart3.transform.DOLocalMove(humoPart3.GetComponent<ParteHumo>().initPosition, 2f).SetEase(Ease.Linear);
+		humoPart4.transform.DOLocalMove(humoPart4.GetComponent<ParteHumo>().initPosition, 2f).SetEase(Ease.Linear);
+		humoPart5.transform.DOLocalMove(humoPart5.GetComponent<ParteHumo>().initPosition, 2f).SetEase(Ease.Linear);
+		humoPart6.transform.DOLocalMove(humoPart6.GetComponent<ParteHumo>().initPosition, 2f).SetEase(Ease.Linear);
+		humoPart7.transform.DOLocalMove(humoPart7.GetComponent<ParteHumo>().initPosition, 2f).SetEase(Ease.Linear);
+		humoPart8.transform.DOLocalMove(humoPart8.GetComponent<ParteHumo>().initPosition, 2f).SetEase(Ease.Linear).OnComplete(() => activationCompleted = true);
 
 	}
 }

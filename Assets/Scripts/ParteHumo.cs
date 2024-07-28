@@ -12,7 +12,7 @@ public class ParteHumo : MonoBehaviour
 
 	private void Awake()
 	{
-		transform.position = endPosition;
+		transform.localPosition = endPosition;
 	}
 
 }
