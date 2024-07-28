@@ -6,15 +6,31 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
-public class SceneSwitcher : MonoBehaviour {
-    
+public class SceneSwitcher : MonoBehaviour
+{
+
     [SerializeField] private Image fadeUpper;
     [SerializeField] private Image fadeLower;
     [SerializeField] private float fadeSpeed = 1.0f;
+    public static SceneSwitcher Instance { get; private set; }
+
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {
-        DontDestroyOnLoad(this);
+
         ChangeAlpha(0);
     }
 
@@ -24,15 +40,16 @@ public class SceneSwitcher : MonoBehaviour {
             ? FadeToScene(SceneManager.GetActiveScene().buildIndex + 1)
             : FadeToScene(0));
     }
-    
+
     public void SwitchToPreviousScene()
     {
         StartCoroutine(SceneManager.GetActiveScene().buildIndex - 1 >= 0
             ? FadeToScene(SceneManager.GetActiveScene().buildIndex - 1)
             : FadeToScene(SceneManager.sceneCountInBuildSettings - 1));
     }
-    
-    private IEnumerator FadeToScene(int sceneIndex) {
+
+    private IEnumerator FadeToScene(int sceneIndex)
+    {
         Debug.Log("To scene: " + sceneIndex);
         yield return FadeOut();
         SceneManager.LoadScene(sceneIndex);
@@ -49,8 +66,8 @@ public class SceneSwitcher : MonoBehaviour {
             yield return null;
         }
     }
-    
-    
+
+
     private IEnumerator FadeIn()
     {
         float alpha = 1;
@@ -67,6 +84,6 @@ public class SceneSwitcher : MonoBehaviour {
         fadeUpper.color = new Color(0, 0, 0, alpha);
         fadeLower.color = new Color(0, 0, 0, alpha);
     }
-    
-    
+
+
 }
