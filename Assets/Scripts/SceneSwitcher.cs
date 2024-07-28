@@ -30,7 +30,6 @@ public class SceneSwitcher : MonoBehaviour
 
     private void Start()
     {
-
         ChangeAlpha(0);
     }
 
