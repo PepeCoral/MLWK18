@@ -9,7 +9,7 @@ public class LastSceneTimer : MonoBehaviour
 
 	private float CurrentTimeToEndGame;
 
-	private bool timerEnabled;
+	private bool timerEnabled = true;
 	// Use this for initialization
 	void Awake ()
 	{
@@ -18,13 +18,16 @@ public class LastSceneTimer : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-		CurrentTimeToEndGame -= Time.deltaTime;
-
-		if (timerEnabled && CurrentTimeToEndGame <= 0)
+		if (timerEnabled)
 		{
-			timerEnabled = false;
-			CurrentTimeToEndGame = 0;
-			SceneSwitcher.Instance.SwitchToNextScene();
+			CurrentTimeToEndGame -= Time.deltaTime;
+			
+			if (CurrentTimeToEndGame <= 0)
+			{
+				timerEnabled = false;
+				CurrentTimeToEndGame = 0;
+				SceneSwitcher.Instance.SwitchToNextScene();
+			}
 		}
 	}
 }
