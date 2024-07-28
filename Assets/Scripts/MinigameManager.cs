@@ -37,6 +37,7 @@ public class MinigameManager : MonoBehaviour
 
 	protected virtual void Start()
 	{
+		CountDownText.text = CurrentStartCountdown.ToString("0");
 	}
 
 	protected virtual void StartMinigame()
