@@ -3,12 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Shaking : MonoBehaviour
 {
     Gyroscope gyro;
     public bool isShaking = false;
 
     CastigoHumo castigoHumo;
+
+
 
     private void Start()
     {
@@ -23,10 +26,16 @@ public class Shaking : MonoBehaviour
         //isShaking = DetectShaking();
 
         castigoHumo.blow = isShaking;
+
+
+
+
     }
 
     private bool DetectShaking()
     {
-        return gyro.userAcceleration.magnitude > 0.7f;
+        return gyro.rotationRate.magnitude > 10;
     }
+
+
 }

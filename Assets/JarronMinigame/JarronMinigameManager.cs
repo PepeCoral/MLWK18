@@ -6,10 +6,6 @@ public class JarronMinigameManager : MinigameManager
 {
     [SerializeField] JarronAscenso _jarronAscenso;
     [SerializeField] JarronGiroscopio _jarronGiroscopio;
-    protected override void Update()
-    {
-        base.Update();
-    }
 
     protected override void StartMinigame()
     {
