@@ -44,7 +44,6 @@ public class MoverExtintor : MonoBehaviour
 		{
 			position = inputManager.GetPosition();
 			// Debug.Log("Mirilla" + position.x + " " + position.y);
-			var step = speedMove * Time.deltaTime; // calculate distance to move
 			Vector3 newPosition;
 			if (position.x > 0 || position.y > 0)
 			{

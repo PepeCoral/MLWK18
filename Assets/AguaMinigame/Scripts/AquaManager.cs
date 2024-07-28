@@ -1,20 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿namespace AguaMinigame.Scripts
+{
+	public class AquaManager: MinigameManager {
 
-public class AquaManager: MinigameManager {
-
-	// Use this for initialization
-	void Start () {
+		// Use this for initialization
+		protected override void Start () {
 		
-	}
+		}
 	
-	// Update is called once per frame
-	void Update () {
+		// Update is called once per frame
+		protected override void Update () {
 		
-	}
-
-	protected override void StartMinigame () {
-		base.StartMinigame ();
+		}
 	}
 }
