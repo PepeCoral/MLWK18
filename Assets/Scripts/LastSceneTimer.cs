@@ -22,6 +22,7 @@ public class LastSceneTimer : MonoBehaviour
 		{
 			CurrentTimeToEndGame = 0;
 			SceneSwitcher.Instance.SwitchToNextScene();
+			enabled = false;
 		}
 	}
 }
