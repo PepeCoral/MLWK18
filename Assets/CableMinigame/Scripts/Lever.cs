@@ -72,6 +72,8 @@ public class Lever : MonoBehaviour, ITactilGameObject
 			{
 				lightBulb.TurnOn();
 				MinigameManager.CompleteMinigame();
+				
+				transform.position = StartLocation - new Vector3(0, YTarget, 0);
 			}
 			else
 			{

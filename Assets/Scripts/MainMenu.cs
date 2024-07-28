@@ -49,6 +49,7 @@ public class MainMenu : MonoBehaviour
 		if (step == 3)
 		{
 			scenemanager.GetComponent<SceneSwitcher>().SwitchToNextScene();
+			step++;
 		}
 
 		// text.DOFade(0f, 1f).SetLoops(-1, LoopType.Yoyo);

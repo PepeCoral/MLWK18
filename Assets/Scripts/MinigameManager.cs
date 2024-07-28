@@ -13,8 +13,6 @@ public class MinigameManager : MonoBehaviour
 	[SerializeField] protected float MinigameTimeLength = 15;
 	[SerializeField] protected float CountdownToStart = 5;
 	[SerializeField] protected float NextSceneTimer = 3;
-	[SerializeField] string SceneSwitcherTag = "SceneSwitcher";
-	SceneSwitcher Switcher;
 	
 	[Header("Pre Game Menu")]
 	//Time to finish this minigame once started, if this expires, the minigame has failed
@@ -39,7 +37,6 @@ public class MinigameManager : MonoBehaviour
 
 	protected virtual void Start()
 	{
-		Switcher = GameObject.FindGameObjectWithTag(SceneSwitcherTag).GetComponent<SceneSwitcher>();
 	}
 
 	protected virtual void StartMinigame()
@@ -92,7 +89,7 @@ public class MinigameManager : MonoBehaviour
 				CurrentNextSceneTimer = 0;
 				bIsNextSceneTimerActive = false;
 
-				Switcher.SwitchToNextScene();
+				SceneSwitcher.Instance.SwitchToNextScene();
 			}
 		}
 	}
