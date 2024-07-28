@@ -23,7 +23,7 @@ public class Shaking : MonoBehaviour
 
     private void Update()
     {
-        //isShaking = DetectShaking();
+        isShaking = DetectShaking();
 
         castigoHumo.blow = isShaking;
 
@@ -34,7 +34,7 @@ public class Shaking : MonoBehaviour
 
     private bool DetectShaking()
     {
-        return gyro.rotationRate.magnitude > 10;
+        return gyro.rotationRate.magnitude > 15;
     }
 
 
