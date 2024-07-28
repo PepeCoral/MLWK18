@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.N3DS;
 using UnityEngine.UI;
@@ -7,12 +9,17 @@ using DG.Tweening;
 
 public class MainMenu : MonoBehaviour
 {
-	public Text text;
 	public GameObject bombilla;
 	private Animator bombillaAnimation;
+	
+	private Button playButton;
+	
+	[SerializeField] private Canvas canvas;
 
 	private void Awake()
 	{
+		playButton = FindObjectsOfType<Button>().FirstOrDefault(g => g.name == "PlayButton");
+		
 		if (bombilla != null)
 		{
 			bombillaAnimation = bombilla.GetComponent<Animator>();
@@ -21,30 +28,28 @@ public class MainMenu : MonoBehaviour
 
 	}
 
-	void Start()
+	private void Start()
 	{
-		if (text != null)
-		{
-			text.DOFade(0f, 1f).SetLoops(-1, LoopType.Yoyo);
-		}
-
+		canvas.sortingOrder = 1000;
+		playButton.transform.DOScale(new Vector3(1.1f, 1.1f, 1.1f), 1).SetLoops(-1, LoopType.Yoyo);
 	}
 
 	void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.Space) || GamePad.GetButtonTrigger(N3dsButton.A))
 		{
-			if (bombillaAnimation != null)
-			{
-				StartGame();
-			}
+			StartGame();
 		}
 	}
 
 
 	public void StartGame()
 	{
-		StartCoroutine(WaitForAnimationAndSwitchScene());
+		canvas.sortingOrder = -1000;
+		if (bombillaAnimation != null)
+		{
+			StartCoroutine(WaitForAnimationAndSwitchScene());
+		}
 	}
 	private IEnumerator WaitForAnimationAndSwitchScene()
 	{

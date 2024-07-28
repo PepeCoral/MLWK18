@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Serialization;
 
 public class Humo : MinigameManager
 {
-	public SpriteRenderer renderer;
+	[FormerlySerializedAs("renderer")] public SpriteRenderer spriteRenderer;
 	public Color color;
 	public bool fade = false;
 	protected override void Awake()
 	{
 		base.Awake();
-		renderer = this.GetComponent<SpriteRenderer>();
+		spriteRenderer = this.GetComponent<SpriteRenderer>();
 
 	}
 
@@ -22,7 +23,7 @@ public class Humo : MinigameManager
 		if (MinigameTimeLength / 2 > CurrentTimeLength && !fade)
 		{
 
-			renderer.DOFade(1, MinigameTimeLength / 2);
+			spriteRenderer.DOFade(1, MinigameTimeLength / 2);
 			fade = true;
 		}
 

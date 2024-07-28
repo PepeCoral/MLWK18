@@ -47,7 +47,6 @@ public class JarronGiroscopio : MonoBehaviour
 
         if (rb.gameObject.transform.rotation.eulerAngles.z > 90 && rb.gameObject.transform.rotation.eulerAngles.z < 270)
         {
-
             JarronFall();
         }
 
