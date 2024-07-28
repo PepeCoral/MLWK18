@@ -1,0 +1,339 @@
+fileFormatVersion: 2
+guid: 6b36deb87ef9e1e4696111a1045719ce
+timeCreated: 1722136224
+licenseType: Pro
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Mapa_NocheCold_0
+    21300002: Mapa_NocheCold_1
+    21300004: Mapa_NocheCold_2
+    21300006: Mapa_NocheCold_3
+    21300008: Mapa_NocheCold_4
+    21300010: Mapa_NocheCold_5
+    21300012: Mapa_NocheCold_6
+    21300014: Mapa_NocheCold_7
+    21300016: Mapa_NocheCold_8
+    21300018: Mapa_NocheCold_9
+    21300020: Mapa_NocheCold_10
+    21300022: Mapa_NocheCold_11
+    21300024: Mapa_NocheCold_12
+    21300026: Mapa_NocheCold_13
+    21300028: Mapa_NocheCold_14
+    21300030: Mapa_NocheCold_15
+    21300032: Mapa_NocheCold_16
+    21300034: Mapa_NocheCold_17
+    21300036: Mapa_NocheCold_18
+    21300038: Mapa_NocheCold_19
+    21300040: Mapa_NocheCold_20
+    21300042: Mapa_NocheCold_21
+    21300044: Mapa_NocheCold_22
+    21300046: Mapa_NocheCold_23
+    21300048: Mapa_NocheCold_24
+    21300050: Mapa_NocheCold_25
+    21300052: Mapa_NocheCold_26
+    21300054: Mapa_NocheCold_27
+    21300056: Mapa_NocheCold_28
+    21300058: Mapa_NocheCold_29
+    21300060: Mapa_NocheCold_30
+    21300062: Mapa_NocheCold_31
+    21300064: Mapa_NocheCold_32
+    21300066: Mapa_NocheCold_33
+    21300068: Mapa_NocheCold_34
+    21300070: Mapa_NocheCold_35
+    21300072: Mapa_NocheCold_36
+    21300074: Mapa_NocheCold_37
+    21300076: Mapa_NocheCold_38
+    21300078: Mapa_NocheCold_39
+    21300080: Mapa_NocheCold_40
+    21300082: Mapa_NocheCold_41
+    21300084: Mapa_NocheCold_42
+    21300086: Mapa_NocheCold_43
+    21300088: Mapa_NocheCold_44
+    21300090: Mapa_NocheCold_45
+    21300092: Mapa_NocheCold_46
+    21300094: Mapa_NocheCold_47
+    21300096: Mapa_NocheCold_48
+    21300098: Mapa_NocheCold_49
+    21300100: Mapa_NocheCold_50
+    21300102: Mapa_NocheCold_51
+    21300104: Mapa_NocheCold_52
+    21300106: Mapa_NocheCold_53
+    21300108: Mapa_NocheCold_54
+    21300110: Mapa_NocheCold_55
+    21300112: Mapa_NocheCold_56
+    21300114: Mapa_NocheCold_57
+    21300116: Mapa_NocheCold_58
+    21300118: Mapa_NocheCold_59
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 0
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 512
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 512
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Nintendo 3DS
+    maxTextureSize: 512
+    textureFormat: 60
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Mapa_NocheCold_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 522.6666
+        width: 270.4
+        height: 261.33334
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Mapa_NocheCold_1
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 522.6666
+        width: 270.4
+        height: 261.33334
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Mapa_NocheCold_2
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 522.6666
+        width: 270.4
+        height: 261.33334
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Mapa_NocheCold_3
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 522.6666
+        width: 270.4
+        height: 261.33334
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Mapa_NocheCold_4
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 522.6666
+        width: 270.4
+        height: 261.33334
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Mapa_NocheCold_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 261.66666
+        width: 270.4
+        height: 261.33334
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Mapa_NocheCold_6
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 261.66666
+        width: 270.4
+        height: 261.33334
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Mapa_NocheCold_7
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 261.66666
+        width: 270.4
+        height: 261.33334
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Mapa_NocheCold_8
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 261.66666
+        width: 270.4
+        height: 261.33334
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Mapa_NocheCold_9
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 261.66666
+        width: 270.4
+        height: 261.33334
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Mapa_NocheCold_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0.6666565
+        width: 270.4
+        height: 261.33334
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Mapa_NocheCold_11
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 0.6666565
+        width: 270.4
+        height: 261.33334
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Mapa_NocheCold_12
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 0.6666565
+        width: 270.4
+        height: 261.33334
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Mapa_NocheCold_13
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 0.6666565
+        width: 270.4
+        height: 261.33334
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Mapa_NocheCold_14
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 0.6666565
+        width: 270.4
+        height: 261.33334
+      alignment: 6
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
