@@ -11,20 +11,24 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool havePenalty = false;
     private Vector2 input;
 
-    private  Animator animator;
+    private Animator animator;
 
     private Rigidbody2D rb;
     [SerializeField] float _speed;
+
+    public bool canWalk = true;
 
 
     void Awake()
     {
         animator = this.GetComponent<Animator>();
-        rb =  this.GetComponent<Rigidbody2D>();
+        rb = this.GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
+
+        if (!canWalk) return;
         var pad = GamePad.CirclePad.normalized;
         var cross = GetCross().normalized;
 
