@@ -36,11 +36,16 @@ public class MainMenu : MonoBehaviour
 		{
 			if (bombillaAnimation != null)
 			{
-				StartCoroutine(WaitForAnimationAndSwitchScene());
+				StartGame();
 			}
 		}
 	}
 
+
+	public void StartGame()
+	{
+		StartCoroutine(WaitForAnimationAndSwitchScene());
+	}
 	private IEnumerator WaitForAnimationAndSwitchScene()
 	{
 		bombillaAnimation.SetBool("start", true);
