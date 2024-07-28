@@ -13,6 +13,8 @@ public class MainMenu : MonoBehaviour
 	private Animator bombillaAnimation;
 	
 	private Button playButton;
+	
+	[SerializeField] private Canvas canvas;
 
 	private void Awake()
 	{
@@ -28,6 +30,7 @@ public class MainMenu : MonoBehaviour
 
 	private void Start()
 	{
+		canvas.sortingOrder = 1000;
 		playButton.transform.DOScale(new Vector3(1.1f, 1.1f, 1.1f), 1).SetLoops(-1, LoopType.Yoyo);
 	}
 
@@ -42,6 +45,7 @@ public class MainMenu : MonoBehaviour
 
 	public void StartGame()
 	{
+		canvas.sortingOrder = -1000;
 		if (bombillaAnimation != null)
 		{
 			StartCoroutine(WaitForAnimationAndSwitchScene());
